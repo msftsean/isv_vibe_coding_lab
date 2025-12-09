@@ -35,7 +35,8 @@ async def test_search_tool_vector_search(
     mock_client = MagicMock()
     mock_client.search = MagicMock(return_value=iter(mock_results))
 
-    with patch("app.tools.search_tool.SearchClient", return_value=mock_client):
+    # Patch at the azure SDK level, not the module level
+    with patch("azure.search.documents.SearchClient", return_value=mock_client):
         from app.tools.search_tool import SearchTool
 
         tool = SearchTool()
@@ -73,7 +74,7 @@ async def test_search_tool_keyword_search() -> None:
     mock_client = MagicMock()
     mock_client.search = MagicMock(return_value=iter(mock_results))
 
-    with patch("app.tools.search_tool.SearchClient", return_value=mock_client):
+    with patch("azure.search.documents.SearchClient", return_value=mock_client):
         from app.tools.search_tool import SearchTool
 
         tool = SearchTool()
@@ -120,7 +121,7 @@ async def test_search_tool_hybrid_search(
     mock_client = MagicMock()
     mock_client.search = MagicMock(return_value=iter(mock_results))
 
-    with patch("app.tools.search_tool.SearchClient", return_value=mock_client):
+    with patch("azure.search.documents.SearchClient", return_value=mock_client):
         from app.tools.search_tool import SearchTool
 
         tool = SearchTool()
@@ -160,7 +161,7 @@ async def test_search_tool_category_filter(
     mock_client = MagicMock()
     mock_client.search = MagicMock(return_value=iter(mock_results))
 
-    with patch("app.tools.search_tool.SearchClient", return_value=mock_client):
+    with patch("azure.search.documents.SearchClient", return_value=mock_client):
         from app.tools.search_tool import SearchTool
 
         tool = SearchTool()
@@ -200,7 +201,7 @@ async def test_search_tool_get_categories() -> None:
     mock_client = MagicMock()
     mock_client.search = MagicMock(return_value=mock_results)
 
-    with patch("app.tools.search_tool.SearchClient", return_value=mock_client):
+    with patch("azure.search.documents.SearchClient", return_value=mock_client):
         from app.tools.search_tool import SearchTool
 
         tool = SearchTool()
@@ -229,7 +230,7 @@ async def test_openai_tool_chat_completion() -> None:
     mock_client = MagicMock()
     mock_client.chat.completions.create = AsyncMock(return_value=mock_response)
 
-    with patch("app.tools.openai_tool.AsyncAzureOpenAI", return_value=mock_client):
+    with patch("openai.AsyncAzureOpenAI", return_value=mock_client):
         from app.tools.openai_tool import OpenAITool
 
         tool = OpenAITool()
@@ -257,7 +258,7 @@ async def test_openai_tool_create_embedding() -> None:
     mock_client = MagicMock()
     mock_client.embeddings.create = AsyncMock(return_value=mock_response)
 
-    with patch("app.tools.openai_tool.AsyncAzureOpenAI", return_value=mock_client):
+    with patch("openai.AsyncAzureOpenAI", return_value=mock_client):
         from app.tools.openai_tool import OpenAITool
 
         tool = OpenAITool()
@@ -282,7 +283,7 @@ async def test_openai_tool_connection_check_success() -> None:
     mock_client = MagicMock()
     mock_client.chat.completions.create = AsyncMock(return_value=mock_response)
 
-    with patch("app.tools.openai_tool.AsyncAzureOpenAI", return_value=mock_client):
+    with patch("openai.AsyncAzureOpenAI", return_value=mock_client):
         from app.tools.openai_tool import OpenAITool
 
         tool = OpenAITool()
@@ -304,7 +305,7 @@ async def test_openai_tool_connection_check_failure() -> None:
         side_effect=Exception("Connection failed")
     )
 
-    with patch("app.tools.openai_tool.AsyncAzureOpenAI", return_value=mock_client):
+    with patch("openai.AsyncAzureOpenAI", return_value=mock_client):
         from app.tools.openai_tool import OpenAITool
 
         tool = OpenAITool()

@@ -134,18 +134,26 @@ async def test_civicnav_feedback_tool() -> None:
 
 @pytest.mark.asyncio
 async def test_civicnav_query_tool_error_handling() -> None:
-    """Test error handling in civicnav_query tool."""
-    with patch("app.mcp.server.submit_query_internal", new_callable=AsyncMock) as mock_query:
-        mock_query.side_effect = Exception("Connection failed")
+    """Test error handling in civicnav_query tool.
+
+    The error handling happens inside submit_query_internal, so we need
+    to patch the QueryAgent to throw an exception to test the error path.
+    """
+    with patch("app.mcp.server.QueryAgent") as mock_agent_class:
+        # Make the QueryAgent.execute raise an exception
+        mock_agent = MagicMock()
+        mock_agent.execute = AsyncMock(side_effect=Exception("Connection failed"))
+        mock_agent_class.return_value = mock_agent
 
         from app.mcp.server import civicnav_query
 
         # Act
         result = await civicnav_query("test query")
 
-        # Assert
+        # Assert - error should be caught and returned in the response
         assert result is not None
         assert "error" in result
+        assert "Connection failed" in result["error"]
 
 
 @pytest.mark.asyncio
