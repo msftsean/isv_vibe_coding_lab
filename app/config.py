@@ -32,6 +32,17 @@ class Settings(BaseSettings):
     app_version: str = "1.0.0"
     debug: bool = False
     log_level: str = "INFO"
+    demo_mode: bool = True  # Run with mock data when Azure services unavailable
+
+    # Ollama Configuration (for demo mode with local LLM)
+    ollama_endpoint: str = "http://localhost:11434"
+    ollama_model: str = "phi3:mini"  # Options: tinyllama, phi3:mini, llama3.2:3b, qwen2.5:3b
+    use_ollama: bool = False  # Use Ollama for LLM in demo mode
+
+    # OpenAI Configuration (for demo mode with OpenAI API)
+    openai_api_key: str = ""
+    openai_model: str = "gpt-4o-mini"  # Fast and cheap, or use gpt-4o for better quality
+    use_openai: bool = True  # Use OpenAI API in demo mode
 
     # Performance Configuration
     search_top_k: int = 5

@@ -42,14 +42,14 @@ Entity types:
 Return ONLY valid JSON, no additional text.
 
 Example response:
-{
+{{
   "category": "schedule",
   "confidence": 0.92,
   "entities": [
-    {"type": "service_type", "value": "trash", "start_pos": 8, "end_pos": 13},
-    {"type": "location", "value": "downtown", "start_pos": 25, "end_pos": 33}
+    {{"type": "service_type", "value": "trash", "start_pos": 8, "end_pos": 13}},
+    {{"type": "location", "value": "downtown", "start_pos": 25, "end_pos": 33}}
   ]
-}
+}}
 
 User query: {query}"""
 
@@ -91,8 +91,14 @@ class QueryAgent(BaseAgent[str, IntentClassification]):
                 max_tokens=500,
             )
 
-            # Parse the JSON response
-            classification_data = json.loads(response)
+            # Parse the JSON response - handle potential escape issues from local LLMs
+            try:
+                classification_data = json.loads(response)
+            except json.JSONDecodeError:
+                # Try to fix common escape issues from local LLMs
+                import re
+                cleaned = re.sub(r'\\([^"\\\/bfnrtu])', r'\1', response)
+                classification_data = json.loads(cleaned)
 
             # Convert entities
             entities = []

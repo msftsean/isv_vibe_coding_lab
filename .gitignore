@@ -74,3 +74,8 @@ logs/
 .env
 .env.local
 .env.*.local
+
+# Spec artifacts (local planning files)
+spec.md
+plan.md
+tasks.md
