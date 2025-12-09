@@ -132,16 +132,20 @@ uvicorn app.main:app --reload --port 8000
 
 ## 📚 Lab Exercises
 
-| # | Exercise | ⏱️ Duration | 🎯 Focus | Status |
-|---|----------|-------------|----------|--------|
-| 1 | 🔌 Azure MCP Server Setup | 15 min | Configure Copilot Agent Mode | ✅ Ready |
-| 2 | 📝 Spec-Driven Development | 15 min | Scaffold from SPEC.md | ✅ Ready |
-| 3 | 🔍 Build RAG Pipeline | 45 min | Implement hybrid search | ✅ Ready |
-| 4 | 🤖 Agent Orchestration | 30 min | Wire the agentic pipeline | ✅ Ready |
-| 5 | ☁️ Deploy with azd | 20 min | One-command deployment | ✅ Ready |
-| 6 | 🔧 Expose as MCP Server | 15 min | Enable AI tool access | ✅ Ready |
+Complete, step-by-step guides are available in the [docs/exercises](./docs/exercises/) folder:
 
-> **⏱️ Total Time**: ~2.5 hours
+| # | Exercise | Description | Duration | Difficulty |
+|---|----------|-------------|----------|------------|
+| 0 | [Environment Setup](./docs/exercises/00-environment-setup.md) | Python, VS Code, dependencies | 20 min | ⭐ Beginner |
+| 1 | [Understanding AI Agents & RAG](./docs/exercises/01-understanding-agents-rag.md) | Core concepts | 25 min | ⭐ Beginner |
+| 2 | [Azure MCP Server Setup](./docs/exercises/02-azure-mcp-setup.md) | Configure Copilot Agent Mode | 20 min | ⭐ Beginner |
+| 3 | [Spec-Driven Development](./docs/exercises/03-spec-driven-development.md) | AI code generation patterns | 20 min | ⭐ Beginner |
+| 4 | [Build RAG Pipeline](./docs/exercises/04-build-rag-pipeline.md) | Search tool & RetrieveAgent | 45 min | ⭐⭐ Intermediate |
+| 5 | [Agent Orchestration](./docs/exercises/05-agent-orchestration.md) | Pipeline & data flow | 40 min | ⭐⭐⭐ Advanced |
+| 6 | [Deploy with azd](./docs/exercises/06-deploy-with-azd.md) | Azure Container Apps | 35 min | ⭐⭐ Intermediate |
+| 7 | [Expose as MCP Server](./docs/exercises/07-expose-as-mcp-server.md) | Create your own MCP server | 45 min | ⭐⭐⭐ Advanced |
+
+> **⏱️ Total Time**: ~4 hours | **📖 Start here**: [Exercise Guide](./docs/exercises/README.md)
 
 ---
 
