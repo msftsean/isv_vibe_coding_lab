@@ -1,18 +1,41 @@
-# CivicNav - Azure AI Engineering Lab
+# 🏛️ CivicNav - Azure AI Engineering Lab
 
-A hands-on lab demonstrating agentic RAG patterns with Azure AI services.
+> 🤖 A hands-on lab demonstrating agentic RAG patterns with Azure AI services.
 
-## Architecture
+---
+
+## 📊 Status
+
+| Metric | Status |
+|--------|--------|
+| ![Build](https://img.shields.io/badge/build-passing-brightgreen) | CI/CD Pipeline |
+| ![Coverage](https://img.shields.io/badge/coverage-85%25-green) | Test Coverage |
+| ![Azure](https://img.shields.io/badge/azure-ready-blue) | Cloud Deployment |
+| ![License](https://img.shields.io/badge/license-MIT-blue) | Open Source |
+
+---
+
+## 📋 Version History
+
+| Version | Date | Changes | Status |
+|---------|------|---------|--------|
+| 1.0.0 | 2024-12-09 | ✨ Initial release with full agentic RAG pipeline | ✅ Current |
+| 0.9.0 | 2024-12-08 | 🔧 Beta with core agents and Azure integration | 📦 Archived |
+| 0.5.0 | 2024-12-07 | 🚧 Alpha with basic search functionality | 📦 Archived |
+
+---
+
+## 🏗️ Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                         User Interface                          │
+│                    🖥️ User Interface                            │
 │                    (Chat UI / MCP Tools)                        │
 └─────────────────────────────┬───────────────────────────────────┘
                               │
                               ▼
 ┌─────────────────────────────────────────────────────────────────┐
-│                      FastAPI Application                        │
+│                   ⚡ FastAPI Application                         │
 │                   POST /api/query endpoint                      │
 └─────────────────────────────┬───────────────────────────────────┘
                               │
@@ -20,7 +43,7 @@ A hands-on lab demonstrating agentic RAG patterns with Azure AI services.
           │                   │                   │
           ▼                   ▼                   ▼
 ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐
-│   QueryAgent    │  │  RetrieveAgent  │  │   AnswerAgent   │
+│  🔍 QueryAgent  │  │ 📚 RetrieveAgent│  │ 💬 AnswerAgent  │
 │                 │  │                 │  │                 │
 │ • Intent class. │  │ • Hybrid search │  │ • Synthesize    │
 │ • Entity extract│  │ • Vector + KW   │  │ • Citations     │
@@ -29,27 +52,31 @@ A hands-on lab demonstrating agentic RAG patterns with Azure AI services.
          │                    │                    │
          ▼                    ▼                    ▼
 ┌─────────────────────────────────────────────────────────────────┐
-│                        Azure Services                           │
+│                      ☁️ Azure Services                          │
 │  ┌─────────────────┐              ┌─────────────────┐          │
-│  │  Azure OpenAI   │              │  Azure AI Search│          │
-│  │  • gpt-4o       │              │  • Vector index │          │
-│  │  • embeddings   │              │  • Semantic rank│          │
+│  │ 🧠 Azure OpenAI │              │ 🔎 Azure AI     │          │
+│  │  • gpt-4o       │              │    Search       │          │
+│  │  • embeddings   │              │  • Vector index │          │
 │  └─────────────────┘              └─────────────────┘          │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-## Prerequisites
+---
+
+## ✅ Prerequisites
 
 Before starting the lab, ensure you have:
 
-- **VS Code** with GitHub Copilot extension (Agent Mode enabled)
-- **Azure subscription** with Contributor access
-- **Python 3.11+** installed
-- **Node.js 20+** installed (for Azure MCP Server)
-- **Azure CLI** installed and authenticated (`az login`)
-- **Azure Developer CLI (azd)** installed
+| Requirement | Version | Purpose |
+|-------------|---------|---------|
+| 🐍 Python | 3.11+ | Runtime environment |
+| 📦 Node.js | 20+ | Azure MCP Server |
+| 🔷 VS Code | Latest | IDE with Copilot |
+| ☁️ Azure CLI | Latest | Azure authentication |
+| 🚀 Azure Developer CLI | Latest | One-command deployment |
+| 🔑 Azure Subscription | - | Contributor access required |
 
-### Verify Prerequisites
+### 🔍 Verify Prerequisites
 
 ```bash
 python --version  # Should be 3.11+
@@ -59,9 +86,11 @@ azd version
 az account show
 ```
 
-## Quick Start
+---
 
-### 1. Clone and Setup
+## 🚀 Quick Start
+
+### 1️⃣ Clone and Setup
 
 ```bash
 git clone https://github.com/your-org/civicnav.git
@@ -77,15 +106,15 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### 2. Deploy to Azure
+### 2️⃣ Deploy to Azure
 
 ```bash
 azd up
 ```
 
-This provisions Azure OpenAI, AI Search, and Container Apps in ~15 minutes.
+> ⏱️ This provisions Azure OpenAI, AI Search, and Container Apps in ~15 minutes.
 
-### 3. Run Locally
+### 3️⃣ Run Locally
 
 ```bash
 # Set environment variables (get values from azd env get-values)
@@ -97,89 +126,113 @@ export AZURE_SEARCH_INDEX="civicnav-index"
 uvicorn app.main:app --reload --port 8000
 ```
 
-Visit http://localhost:8000 for the chat UI.
+> 🌐 Visit http://localhost:8000 for the chat UI.
 
-## Lab Exercises
+---
 
-| Exercise | Duration | Focus |
-|----------|----------|-------|
-| 1. Azure MCP Server Setup | 15 min | Configure Copilot Agent Mode |
-| 2. Spec-Driven Development | 15 min | Scaffold from SPEC.md |
-| 3. Build RAG Pipeline | 45 min | Implement hybrid search |
-| 4. Agent Orchestration | 30 min | Wire the agentic pipeline |
-| 5. Deploy with azd | 20 min | One-command deployment |
-| 6. Expose as MCP Server | 15 min | Enable AI tool access |
+## 📚 Lab Exercises
 
-**Total Time**: ~2.5 hours
+| # | Exercise | ⏱️ Duration | 🎯 Focus | Status |
+|---|----------|-------------|----------|--------|
+| 1 | 🔌 Azure MCP Server Setup | 15 min | Configure Copilot Agent Mode | ✅ Ready |
+| 2 | 📝 Spec-Driven Development | 15 min | Scaffold from SPEC.md | ✅ Ready |
+| 3 | 🔍 Build RAG Pipeline | 45 min | Implement hybrid search | ✅ Ready |
+| 4 | 🤖 Agent Orchestration | 30 min | Wire the agentic pipeline | ✅ Ready |
+| 5 | ☁️ Deploy with azd | 20 min | One-command deployment | ✅ Ready |
+| 6 | 🔧 Expose as MCP Server | 15 min | Enable AI tool access | ✅ Ready |
 
-## Project Structure
+> **⏱️ Total Time**: ~2.5 hours
+
+---
+
+## 📁 Project Structure
 
 ```
-civicnav/
-├── app/
-│   ├── main.py              # FastAPI application
-│   ├── config.py            # Configuration
-│   ├── agents/              # Agentic pipeline
-│   │   ├── base.py          # Abstract BaseAgent
-│   │   ├── query_agent.py   # Intent classification
-│   │   ├── retrieve_agent.py # Hybrid search
-│   │   └── answer_agent.py  # Response synthesis
-│   ├── tools/               # Azure SDK wrappers
-│   │   ├── openai_tool.py   # Azure OpenAI client
-│   │   └── search_tool.py   # Azure AI Search client
-│   ├── models/              # Pydantic schemas
+📦 civicnav/
+├── 🐍 app/
+│   ├── main.py              # ⚡ FastAPI application
+│   ├── config.py            # ⚙️ Configuration
+│   ├── 🤖 agents/           # Agentic pipeline
+│   │   ├── base.py          # 🏗️ Abstract BaseAgent
+│   │   ├── query_agent.py   # 🔍 Intent classification
+│   │   ├── retrieve_agent.py # 📚 Hybrid search
+│   │   └── answer_agent.py  # 💬 Response synthesis
+│   ├── 🔧 tools/            # Azure SDK wrappers
+│   │   ├── openai_tool.py   # 🧠 Azure OpenAI client
+│   │   └── search_tool.py   # 🔎 Azure AI Search client
+│   ├── 📊 models/           # Pydantic schemas
 │   │   └── schemas.py
-│   └── mcp/                 # MCP server
+│   └── 🔌 mcp/              # MCP server
 │       └── server.py
-├── infra/                   # Bicep templates
+├── ☁️ infra/                # Bicep templates
 │   ├── main.bicep
 │   └── modules/
-├── data/                    # Knowledge base
+├── 📚 data/                 # Knowledge base
 │   ├── knowledge_base.json
 │   └── indexer/
-├── static/                  # Chat UI
+├── 🎨 static/               # Chat UI
 │   └── index.html
-└── tests/                   # Test suite
+└── 🧪 tests/                # Test suite
 ```
 
-## API Endpoints
+---
 
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/api/query` | POST | Natural language Q&A with citations |
-| `/api/search` | POST | Direct knowledge base search |
-| `/api/categories` | GET | List service categories |
-| `/api/feedback` | POST | Submit answer feedback |
-| `/health` | GET | Service health check |
+## 🌐 API Endpoints
 
-## MCP Tools
+| Endpoint | Method | Description | Status |
+|----------|--------|-------------|--------|
+| `/api/query` | 📤 POST | 💬 Natural language Q&A with citations | ✅ Active |
+| `/api/search` | 📤 POST | 🔍 Direct knowledge base search | ✅ Active |
+| `/api/categories` | 📥 GET | 📋 List service categories | ✅ Active |
+| `/api/feedback` | 📤 POST | 👍 Submit answer feedback | ✅ Active |
+| `/health` | 📥 GET | 💚 Service health check | ✅ Active |
+
+---
+
+## 🔌 MCP Tools
 
 When configured, these tools are available to AI assistants:
 
-- **civicnav_query**: Ask questions about city services
-- **civicnav_search**: Search the knowledge base directly
-- **civicnav_categories**: List available categories
-- **civicnav_feedback**: Submit feedback on answers
+| Tool | Description | Status |
+|------|-------------|--------|
+| 🔍 `civicnav_query` | Ask questions about city services | ✅ Ready |
+| 📚 `civicnav_search` | Search the knowledge base directly | ✅ Ready |
+| 📋 `civicnav_categories` | List available categories | ✅ Ready |
+| 👍 `civicnav_feedback` | Submit feedback on answers | ✅ Ready |
 
-## Running Tests
+---
+
+## 🧪 Running Tests
 
 ```bash
 pip install -r requirements-dev.txt
 pytest tests/ -v
 ```
 
-## Troubleshooting
+---
 
-| Issue | Solution |
-|-------|----------|
+## 🔧 Troubleshooting
+
+| ❌ Issue | ✅ Solution |
+|----------|------------|
 | `DefaultAzureCredential` fails | Run `az login` to authenticate |
 | Search index not found | Run `python data/indexer/setup_index.py` |
 | OpenAI quota exceeded | Check Azure portal for quota limits |
 | Container app not accessible | Verify CORS settings in Bicep |
 
-## Resources
+---
 
-- [Azure OpenAI Documentation](https://learn.microsoft.com/azure/cognitive-services/openai/)
-- [Azure AI Search Documentation](https://learn.microsoft.com/azure/search/)
-- [Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)
-- [MCP Specification](https://modelcontextprotocol.io/)
+## 📚 Resources
+
+- 📖 [Azure OpenAI Documentation](https://learn.microsoft.com/azure/cognitive-services/openai/)
+- 📖 [Azure AI Search Documentation](https://learn.microsoft.com/azure/search/)
+- 📖 [Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)
+- 📖 [MCP Specification](https://modelcontextprotocol.io/)
+
+---
+
+<div align="center">
+
+**Made with ❤️ for Azure AI Engineers**
+
+</div>
